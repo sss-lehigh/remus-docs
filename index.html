@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Remus RDMA Library Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <h2>Remus Docs</h2>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#usage">Usage</a></li>
+      <li><a href="#api-reference">API Reference</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#contributing">Contributing</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <h1>Overview</h1>
+      <p>Remus is a low-level C library providing one-sided RDMA primitives for high-performance networking. It exposes APIs to register memory regions, perform RDMA reads/writes, and manage completion queues with minimal overhead.</p>
+    </section>
+
+    <section id="installation">
+      <h2>Installation</h2>
+      <pre><code>git clone https://github.com/youruser/remus.git
+cd remus
+mkdir build && cd build
+cmake ..
+make -j$(nproc)
+sudo make install</code></pre>
+    </section>
+
+    <section id="usage">
+      <h2>Usage</h2>
+      <pre><code>#include &lt;remus/remus.h&gt;
+
+int main() {
+    remus_context_t ctx;
+    remus_init(&ctx);
+    // ... your RDMA logic ...
+    remus_cleanup(&ctx);
+    return 0;
+}</code></pre>
+    </section>
+
+    <section id="api-reference">
+      <h2>API Reference</h2>
+      <ul>
+        <li><code>int remus_init(remus_context_t *ctx)</code> – initialize context.</li>
+        <li><code>int remus_reg_mr(remus_context_t *ctx, void *addr, size_t len, int access)</code> – register a memory region.</li>
+        <li><code>int remus_post_send(remus_context_t *ctx, remus_wr_t *wr)</code> – post an RDMA read/write.</li>
+        <li><code>int remus_poll_cq(remus_context_t *ctx, int timeout_ms)</code> – poll completion queue.</li>
+      </ul>
+    </section>
+
+    <section id="examples">
+      <h2>Examples</h2>
+      <pre><code>remus_wr_t wr = {
+    .opcode      = REMUS_RDMA_READ,
+    .local_addr  = local_buf,
+    .remote_addr = remote_addr,
+    .length      = size
+};
+remus_post_send(&ctx, &wr);
+remus_poll_cq(&ctx, 1000);</code></pre>
+    </section>
+
+    <section id="contributing">
+      <h2>Contributing</h2>
+      <p>Contributions are welcome! Please open issues or pull requests on <a href="https://github.com/youruser/remus">GitHub</a>. See <code>CONTRIBUTING.md</code> for guidelines.</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Remus Project
+  </footer>
+</body>
+</html>
