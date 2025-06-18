@@ -5,7 +5,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Remus Docs</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --matte-brown: #6B4C3B;
+      --matte-gray:  #7D7D7D;
+      --matte-black: #1E1E1E;
+      --text-color:  #000000;
+      --max-width:   800px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: var(--matte-gray);
+      color: var(--text-color);
+    }
+
+    nav {
+      width: 250px;
+      background: var(--matte-brown);
+      padding: 1rem;
+    }
+
+    nav h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: var(--matte-gray);
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav li {
+      margin-bottom: 0.5rem;
+    }
+
+    nav a {
+      color: var(--matte-gray);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+      max-width: var(--max-width);
+      padding: 2rem;
+      margin-left: 250px;
+    }
+
+    footer {
+      margin-left: 250px;
+      text-align: center;
+      padding: 1rem;
+      background: var(--matte-black);
+      color: var(--matte-gray);
+      position: absolute;
+      width: calc(100% - 250px);
+      bottom: 0;
+    }
+
+    .code-block {
+      position: relative;
+      margin: 1.5rem 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: var(--matte-gray);
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
+
+    .copy-btn:hover {
+      opacity: 0.8;
+    }
+
+    pre {
+      background: var(--matte-black);
+      color: var(--matte-gray);
+      padding: 1.5rem 1rem 1rem;
+      overflow-x: auto;
+      border-radius: 4px;
+      font-family: Menlo, Consolas, monospace;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      white-space: pre;
+    }
+  </style>
+
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -29,42 +143,44 @@
 
     <section id="installation">
       <h2>Installation</h2>
-      <pre><code>git clone REMUS_LINK
-
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>git clone REMUS_LINK</pre>
+      </div>
     </section>
 
     <section id="usage">
       <h2>Usage</h2>
-      <pre><code>
-
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><!-- Example usage commands here --></pre>
+      </div>
     </section>
 
     <section id="api-reference">
       <h2>API Reference</h2>
       <ul>
-
+        <!-- API items -->
       </ul>
     </section>
 
     <section id="examples">
       <h2>Examples</h2>
-      <pre><code>
-        
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><!-- Example code snippets here --></pre>
+      </div>
     </section>
 
     <section id="contributing">
       <h2>Contributing</h2>
-      
+      <p>Contributions welcome! Please open an issue or PR.</p>
     </section>
   </main>
 
   <footer>
     &copy; SPAA 2025 Workshop
   </footer>
-
 </body>
 
 </html>
