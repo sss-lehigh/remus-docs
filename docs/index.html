@@ -55,32 +55,66 @@ sudo make install
       <h2>Usage</h2>
       <div class="code-block">
         <button class="copy-btn" aria-label="Copy usage snippet">📋</button>
-        <pre><code># your usage examples here
-remus run --help
-</code></pre>
-      </div>
-    </section>
-
-    <section id="api-reference">
-      <h2>API Reference</h2>
-      <ul>
-        <!-- List your endpoints here -->
-      </ul>
-    </section>
-
-    <section id="examples">
-      <h2>Examples</h2>
-      <div class="code-block">
-        <button class="copy-btn" aria-label="Copy example code">📋</button>
         <pre><code>TODO
 </code></pre>
       </div>
-    </section>
+      <section id="api-reference">
+        <h2>API Reference</h2>
+        <h3>ComputeThread Class</h3>
+        <dl class="api-list">
+          <!-- ComputeThread lifecycle & introspection -->
+          <dt><tt>explicit ComputeThread(uint64_t id, std::shared_ptr&lt;ComputeNode&gt; cn,
+              std::shared_ptr&lt;ArgMap&gt; args)</tt></dt>
+          <dd>Construct a ComputeThread with thread ID <tt>id</tt>, ComputeNode context <tt>cn</tt>, and arguments
+            <tt>args</tt>.
+          </dd>
 
-    <section id="contributing">
-      <h2>Contributing</h2>
-      <p>Contributions welcome! Open an issue or submit a pull request.</p>
-    </section>
+          <dt><tt>~ComputeThread()</tt></dt>
+          <dd>Destroy this ComputeThread, logging its termination.</dd>
+
+          <dt><tt>uint64_t get_tid()</tt></dt>
+          <dd>Return this thread’s zero-based numerical ID.</dd>
+
+          <!-- RDMA operations -->
+          <!-- Read -->
+          <dt><tt>template &lt;typename T&gt; T Read(rdma_ptr&lt;T&gt; ptr)</tt></dt>
+          <dd>Read a fixed-sized object from the RDMA heap.</dd>
+          <!-- Write -->
+          <dt><tt>template &lt;typename T&gt; void Write(rdma_ptr&lt;T&gt; ptr, const T &amp;val)</tt></dt>
+          <dd>Write a value into the RDMA heap.</dd>
+          <!-- CAS -->
+          <dt><tt>template &lt;typename T&gt; T CompareAndSwap(rdma_ptr&lt;T&gt; ptr, T expected, T swap)</tt></dt>
+          <dd>Atomically compare <tt>ptr</tt> to <tt>expected</tt>; if equal, swap in <tt>swap</tt>, returning the old
+            value.</dd>
+          <!-- FetchAndAdd -->
+          <dt><tt>template &lt;typename T&gt; T FetchAndAdd(rdma_ptr&lt;T&gt; ptr, uint64_t add)</tt></dt>
+          <dd>Atomically add <tt>add</tt> to the value at <tt>ptr</tt>, returning the previous value.</dd>
+          <!-- is_local -->
+          <dt><tt>bool is_local(rdma_ptr&lt;T&gt; ptr)</tt></dt>
+          <dd>Return <tt>true</tt> if <tt>ptr</tt> refers to this machine’s local memory segment.</dd>
+          <!-- arrive_control_barrier -->
+          <dt><tt>void arrive_control_barrier(int total_threads)</tt></dt>
+          <dd>Block until <tt>total_threads</tt> threads have reached the barrier in Segment 0 of MemoryNode 0.</dd>
+          <!-- allocate -->
+          <dt><tt>template &lt;typename T&gt; rdma_ptr&lt;T&gt; allocate(std::size_t n = 1)</tt></dt>
+          <dd>Allocate memory for <tt>n</tt> objects of type <tt>T</tt>, trying local then global policies.</dd>
+          <!-- deallocate -->
+          <dt><tt>template &lt;typename T&gt; void deallocate(rdma_ptr&lt;T&gt; ptr)</tt></dt>
+          <dd>Return a previously allocated region to the free lists for reuse.</dd>
+          <!-- set_root -->
+          <dt><tt>template &lt;typename T&gt; void set_root(rdma_ptr&lt;T&gt; root)</tt></dt>
+          <dd>Store <tt>root</tt> in the ControlBlock’s root field (Node 0, Segment 0).</dd>
+          <!-- get_root -->
+          <dt><tt>template &lt;typename T&gt; rdma_ptr&lt;T&gt; get_root()</tt></dt>
+          <dd>Fetch the root pointer from Node 0, Segment 0 and return it as an <tt>rdma_ptr&lt;T&gt;</tt>.</dd>
+
+          </dl>
+        </section>
+
+        <section id="contributing">
+          <h2>Contributing</h2>
+          <p>Contributions welcome! Open an issue or submit a pull request.</p>
+        </section>
   </main>
 
   <footer>
