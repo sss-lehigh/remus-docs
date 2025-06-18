@@ -2,14 +2,19 @@
 <html lang="en">
 
 <head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Remus Docs</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
   <nav>
+    <div class="nav-footer">
+      <img src="lu.png" alt="My Logo">
+    </div>
     <h2>Remus Documentation</h2>
     <ul>
       <li><a href="#overview">Overview</a></li>
@@ -19,51 +24,80 @@
       <li><a href="#examples">Examples</a></li>
       <li><a href="#contributing">Contributing</a></li>
     </ul>
+
   </nav>
 
   <main>
     <section id="overview">
       <h1>Overview</h1>
-      <p>TODO</p>
+      <p>Remus is a C++ library that simplifies the use of Remote Direct Memory Access (RDMA). </p>
     </section>
 
     <section id="installation">
       <h2>Installation</h2>
-      <pre><code>git clone REMUS_LINK
-
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy installation command">📋</button>
+        <pre>
+<code>git clone official_remus_repo
+cd remus
+mkdir build
+cd build
+sudo mkdir -p /opt/remus
+sudo chmod 700 /opt/remus
+CC=clang-18 CXX=clang++-18 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/remus ..
+make -j $(nproc)
+sudo make install
+</code></pre>
+      </div>
     </section>
 
     <section id="usage">
       <h2>Usage</h2>
-      <pre><code>
-
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy usage snippet">📋</button>
+        <pre><code># your usage examples here
+remus run --help
+</code></pre>
+      </div>
     </section>
 
     <section id="api-reference">
       <h2>API Reference</h2>
       <ul>
-
+        <!-- List your endpoints here -->
       </ul>
     </section>
 
     <section id="examples">
       <h2>Examples</h2>
-      <pre><code>
-        
-      </code></pre>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy example code">📋</button>
+        <pre><code>TODO
+</code></pre>
+      </div>
     </section>
 
     <section id="contributing">
       <h2>Contributing</h2>
-      
+      <p>Contributions welcome! Open an issue or submit a pull request.</p>
     </section>
   </main>
 
   <footer>
     &copy; SPAA 2025 Workshop
   </footer>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code.trim()).then(() => {
+          btn.textContent = '✔️';
+          setTimeout(() => btn.textContent = '📋', 1200);
+        });
+      });
+    });
+  </script>
 
 </body>
 
