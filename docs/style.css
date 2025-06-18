@@ -127,3 +127,132 @@ pre {
 .copy-btn:hover::before {
   opacity: 0.8;
 }
+/* style.css */
+/* ↑↑ Updated for higher contrast + icon-only copy buttons ↑↑ */
+
+:root {
+  --matte-brown:  #6B4C3B;
+  --matte-gray:   #7D7D7D;
+  --matte-black:  #1E1E1E;
+  --text-color:   #000000;  /* body text */
+  --heading-color:#111111;  /* headings */
+  --nav-text:     #F5F5F5;  /* nav links & title */
+  --code-text:    #E0E0E0;  /* code block text */
+  --copy-bg:      #1E1E1E;  /* copy-button bg */
+  --copy-icon:    #7D7D7D;  /* copy-icon color */
+  --max-width:    800px;
+}
+
+/* reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* layout */
+body {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: var(--matte-gray);
+  color: var(--text-color);
+}
+
+nav {
+  width: 250px;
+  background: var(--matte-brown);
+  padding: 1rem;
+}
+
+nav h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--nav-text);
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 0.5rem;
+}
+
+nav a {
+  color: var(--nav-text);
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  max-width: var(--max-width);
+  padding: 2rem;
+  margin-left: 250px;
+}
+
+footer {
+  margin-left: 250px;
+  background: var(--matte-black);
+  color: var(--nav-text);
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 250px);
+}
+
+/* headings */
+h1, h2, h3, h4, h5 {
+  color: var(--heading-color);
+}
+
+/* code blocks */
+.code-block {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+pre {
+  background: var(--matte-black);
+  color: var(--code-text);
+  padding: 1.5rem 1rem 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+/* copy button as icon */
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  background: var(--copy-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-indent: -9999px; /* hide fallback text */
+}
+
+.copy-btn::before {
+  content: "📋";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  color: var(--copy-icon);
+}
+
+.copy-btn:hover::before {
+  opacity: 0.8;
+}
